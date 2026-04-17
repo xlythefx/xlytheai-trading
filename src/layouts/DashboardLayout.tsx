@@ -5,7 +5,7 @@ import { DashboardSidebar } from "@/components/ui/dashboard-sidebar";
 function isFullWidthDashboardPath(pathname: string) {
   const parts = pathname.replace(/\/+$/, "").split("/").filter(Boolean);
   const last = parts[parts.length - 1];
-  return last === "user-settings" || last === "portfolio";
+  return last === "user-settings" || last === "portfolio" || last === "add-broker";
 }
 
 const DashboardLayout = () => {

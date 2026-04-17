@@ -266,7 +266,7 @@ const RegisterV2 = () => {
                 {/* Step 0 — Terms of Service */}
                 {step === 0 && (
                   <div className="space-y-3">
-                    <div className="max-h-48 overflow-y-auto rounded-xl border border-border/40 bg-secondary/30 p-3 text-sm text-muted-foreground space-y-3">
+                    <div className="rounded-xl border border-border/40 bg-secondary/30 p-3 text-xs text-muted-foreground space-y-2">
                       <p>
                         By creating an account you agree to our Terms of Service.
                         Trading involves substantial risk of loss. You are
@@ -309,7 +309,7 @@ const RegisterV2 = () => {
                 {/* Step 1 — Privacy Policy */}
                 {step === 1 && (
                   <div className="space-y-3">
-                    <div className="max-h-48 overflow-y-auto rounded-xl border border-border/40 bg-secondary/30 p-3 text-sm text-muted-foreground space-y-3">
+                    <div className="rounded-xl border border-border/40 bg-secondary/30 p-3 text-xs text-muted-foreground space-y-2">
                       <p>
                         We collect your name, email, and exchange API keys
                         (encrypted with AES-256). We use this data to operate

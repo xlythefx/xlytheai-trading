@@ -327,8 +327,12 @@ const Portfolio = () => {
                         {/* Header */}
                         <div className="mb-4 flex items-start justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 text-[11px] font-bold text-white shadow-lg shadow-yellow-500/20">
-                              BNB
+                            <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 p-1.5 shadow-lg shadow-yellow-500/20">
+                              <img
+                                src="/assets/binance.jpeg"
+                                alt="Binance"
+                                className="h-full w-full object-contain"
+                              />
                               <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-green-500" />
                             </div>
                             <div>

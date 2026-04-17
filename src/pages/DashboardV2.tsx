@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Loader2,
   Target,
+  ChevronDown,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -36,6 +37,14 @@ const fmt = (v: number | string | undefined, d = 2) => {
 
 const DATE_RANGES = ["7D", "30D", "90D", "All"] as const;
 type DateRange = (typeof DATE_RANGES)[number];
+
+const MOCK_STRATEGIES = [
+  "Momentum Scalper v2",
+  "Trend Rider Pro",
+  "Mean Reversion Alpha",
+  "Breakout Hunter",
+  "Smart Grid Bot",
+] as const;
 
 function filterByRange(positions: BinancePastPosition[], range: DateRange) {
   if (range === "All") return positions;
@@ -423,6 +432,8 @@ const DashboardV2 = () => {
   const [openPositions, setOpenPositions] = useState<BinancePosition[]>([]);
   const [pastPositions, setPastPositions] = useState<BinancePastPosition[]>([]);
   const [loading, setLoading] = useState(true);
+  const [strategy, setStrategy] = useState<string>(MOCK_STRATEGIES[0]);
+  const [strategyOpen, setStrategyOpen] = useState(false);
 
   const load = useCallback(async () => {
     if (!getToken()) { setLoading(false); return; }
@@ -482,7 +493,7 @@ const DashboardV2 = () => {
         <div className="absolute bottom-[-15%] left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-primary/8 blur-[140px]" />
       </div>
 
-      <V2TopNav active="dashboard" brandTo="/dashboard" onRefresh={load} loading={loading} />
+      <V2TopNav active="dashboard" brandTo="/" onRefresh={load} loading={loading} />
 
       {/* Affiliate banner */}
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 pt-4">
@@ -496,8 +507,43 @@ const DashboardV2 = () => {
           {/* ── LEFT ─────────────────────────────────────────────────────── */}
           <div className="flex flex-col gap-6">
 
+            {/* Stat cards */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+              className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {statCards.map((s, i) => (
+                <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.02 + i * 0.06 }}>
+                  <Card className="group relative overflow-hidden border-border/40 bg-card/50 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10">
+                    {/* Top glow border */}
+                    <div className={`absolute inset-x-0 top-0 h-px ${s.positive
+                      ? "bg-gradient-to-r from-transparent via-primary to-transparent"
+                      : "bg-gradient-to-r from-transparent via-destructive to-transparent"}`} />
+                    {/* Hover shine */}
+                    <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
+                    {/* Auto shine every ~5s (stagger per card) */}
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent animate-v2-stat-shine-sweep"
+                      style={{ animationDelay: `${i * 0.45}s` }}
+                      aria-hidden
+                    />
+                    {/* Corner glow */}
+                    <div className={`pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full blur-2xl ${s.positive ? "bg-primary/20" : "bg-destructive/20"}`} />
+                    <CardContent className="relative p-5">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">{s.label}</p>
+                      <p className={`mt-2.5 text-2xl font-bold tracking-tight ${s.positive ? "text-primary" : "text-destructive"}`}>
+                        {s.isPercent
+                          ? `${fmt(s.value, 1)}%`
+                          : `${s.value >= 0 ? "+" : ""}$${fmt(Math.abs(s.value))}`}
+                      </p>
+                      <p className="mt-1 text-[11px] text-muted-foreground/60">{s.hint}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+
             {/* Wallet + Equity Chart */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
               <Card className="overflow-hidden border-border/40 bg-gradient-to-br from-card/80 via-card/40 to-card/20 backdrop-blur-xl">
                 <CardContent className="p-0">
                   <div className="flex flex-wrap items-start justify-between gap-4 px-6 pt-6">
@@ -569,41 +615,6 @@ const DashboardV2 = () => {
               </Card>
             </motion.div>
 
-            {/* Stat cards */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              {statCards.map((s, i) => (
-                <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.12 + i * 0.06 }}>
-                  <Card className="group relative overflow-hidden border-border/40 bg-card/50 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10">
-                    {/* Top glow border */}
-                    <div className={`absolute inset-x-0 top-0 h-px ${s.positive
-                      ? "bg-gradient-to-r from-transparent via-primary to-transparent"
-                      : "bg-gradient-to-r from-transparent via-destructive to-transparent"}`} />
-                    {/* Hover shine */}
-                    <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
-                    {/* Auto shine every ~5s (stagger per card) */}
-                    <div
-                      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent animate-v2-stat-shine-sweep"
-                      style={{ animationDelay: `${i * 0.45}s` }}
-                      aria-hidden
-                    />
-                    {/* Corner glow */}
-                    <div className={`pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full blur-2xl ${s.positive ? "bg-primary/20" : "bg-destructive/20"}`} />
-                    <CardContent className="relative p-5">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/70">{s.label}</p>
-                      <p className={`mt-2.5 text-2xl font-bold tracking-tight ${s.positive ? "text-primary" : "text-destructive"}`}>
-                        {s.isPercent
-                          ? `${fmt(s.value, 1)}%`
-                          : `${s.value >= 0 ? "+" : ""}$${fmt(Math.abs(s.value))}`}
-                      </p>
-                      <p className="mt-1 text-[11px] text-muted-foreground/60">{s.hint}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-
             {/* Open Orders */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
               <Card className="border-border/40 bg-card/40 backdrop-blur-xl">
@@ -613,15 +624,10 @@ const DashboardV2 = () => {
                       <Activity className="h-4 w-4 text-primary" />
                       <h3 className="text-sm font-semibold">Current Open Orders</h3>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary ring-1 ring-primary/20">
-                        {openPositions.length} active
-                      </span>
-                      <Link to="/positions"
-                        className="text-[11px] font-medium text-muted-foreground transition hover:text-primary">
-                        Full view →
-                      </Link>
-                    </div>
+                    <Link to="/positions"
+                      className="text-[11px] font-medium text-muted-foreground transition hover:text-primary">
+                      Check all running positions →
+                    </Link>
                   </div>
                   {loading ? (
                     <div className="flex items-center justify-center py-8">
@@ -650,7 +656,7 @@ const DashboardV2 = () => {
             className="flex flex-col gap-5">
 
             {/* Overall Win Rate */}
-            <Card className="relative overflow-hidden border-border/40 bg-gradient-to-br from-card/80 to-card/30 backdrop-blur-xl">
+            <Card className={`relative border-border/40 bg-gradient-to-br from-card/80 to-card/30 backdrop-blur-xl ${strategyOpen ? "z-30" : ""}`}>
               <CardContent className="p-5">
                 <div className="mb-3 flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -677,14 +683,37 @@ const DashboardV2 = () => {
                 <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
                   <span>0%</span><span>50%</span><span>100%</span>
                 </div>
-                {stats.profitFactor !== null && (
-                  <div className="mt-3 flex items-center justify-between rounded-lg bg-background/40 px-3 py-2">
-                    <span className="text-[11px] text-muted-foreground">Profit Factor</span>
-                    <span className={`text-sm font-bold ${stats.profitFactor >= 1 ? "text-primary" : "text-destructive"}`}>
-                      {stats.profitFactor === Infinity ? "∞" : fmt(stats.profitFactor)}
+                <div className="relative mt-3">
+                  <button
+                    type="button"
+                    onClick={() => setStrategyOpen((o) => !o)}
+                    className="flex w-full items-center justify-between rounded-lg bg-background/40 px-3 py-2 ring-1 ring-border/40 transition hover:bg-background/60 hover:ring-primary/40"
+                  >
+                    <span className="text-[11px] text-muted-foreground">My Strategies</span>
+                    <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                      {strategy}
+                      <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${strategyOpen ? "rotate-180" : ""}`} />
                     </span>
-                  </div>
-                )}
+                  </button>
+                  {strategyOpen && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setStrategyOpen(false)} aria-hidden />
+                      <div className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-lg border border-border/40 bg-card/95 shadow-2xl backdrop-blur-xl">
+                        {MOCK_STRATEGIES.map((s) => (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => { setStrategy(s); setStrategyOpen(false); }}
+                            className={`flex w-full items-center justify-between px-3 py-2 text-left text-xs transition hover:bg-primary/10 ${s === strategy ? "text-primary" : "text-foreground"}`}
+                          >
+                            <span>{s}</span>
+                            {s === strategy && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               </CardContent>
             </Card>
 

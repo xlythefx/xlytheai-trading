@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Radio, Store, Gift, Menu, X, Zap } from "lucide-react";
+import { ArrowRight, LogIn, Radio, Store, Gift, Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // ─── Lightning WebGL Background ──────────────────────────────────────────────
@@ -397,8 +397,15 @@ export const HeroSection = () => {
             </Link>
             <Link to="/login">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" variant="outline" className="rounded-full px-8 py-6 text-base border-white/20 hover:border-white/40 hover:bg-white/5 text-white transition-all">
-                  Sign In
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full border border-violet-300/25 bg-[linear-gradient(135deg,rgba(34,16,60,0.9),rgba(58,27,94,0.82)_48%,rgba(27,18,55,0.92))] px-8 py-6 text-base text-white shadow-[0_0_0_1px_rgba(196,181,253,0.12),0_0_30px_rgba(168,85,247,0.28)] transition-all hover:border-violet-200/40 hover:bg-[linear-gradient(135deg,rgba(46,22,77,0.96),rgba(76,35,120,0.88)_48%,rgba(34,22,70,0.96))] hover:shadow-[0_0_0_1px_rgba(216,180,254,0.18),0_0_42px_rgba(168,85,247,0.4)]"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-violet-200 via-fuchsia-300 to-indigo-300 text-slate-950 shadow-[0_0_14px_rgba(196,181,253,0.55)]">
+                    <LogIn className="h-3.5 w-3.5" />
+                  </span>
+                  Login
                 </Button>
               </motion.div>
             </Link>
