@@ -29,8 +29,16 @@ import AssetsManagement from "./pages/admin/AssetsManagement";
 import AuditLogs from "./pages/admin/AuditLogs";
 import NotFound from "./pages/NotFound";
 import DashboardLayout from "./layouts/DashboardLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import SupportedAssets from "./pages/SupportedAssets";
 import PositionsV2 from "./pages/PositionsV2";
+import PublicSignals from "./pages/PublicSignals";
+import StrategyMarketplace from "./pages/StrategyMarketplace";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import BinanceTutorial from "./pages/BinanceTutorial";
+import RegisterV2 from "./pages/RegisterV2";
+import AffiliateVerifications from "./pages/admin/AffiliateVerifications";
 
 const queryClient = new QueryClient();
 
@@ -52,8 +60,9 @@ const App = () => (
           <Route path="/admin/:adminCode/config" element={<ConfigManagement />} />
           <Route path="/admin/:adminCode/logs" element={<AuditLogs />} />
           <Route path="/admin/:adminCode/assets" element={<AssetsManagement />} />
+          <Route path="/admin/:adminCode/affiliates" element={<AffiliateVerifications />} />
           
-          <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
             <Route path="trading" element={<Trading />} />
             <Route path="portfolio" element={<Portfolio />} />
@@ -63,15 +72,21 @@ const App = () => (
             <Route path="user-settings" element={<UserSettings />} />
             <Route path="add-broker" element={<AddBroker />} />
           </Route>
-          <Route path="/dashboard-v2" element={<DashboardV2 />} />
-          <Route path="/positions" element={<PositionsV2 />} />
-          <Route path="/asset-performance" element={<AssetPerformance />} />
+          <Route path="/dashboard-v2" element={<ProtectedRoute><DashboardV2 /></ProtectedRoute>} />
+          <Route path="/positions" element={<ProtectedRoute><PositionsV2 /></ProtectedRoute>} />
+          <Route path="/asset-performance" element={<ProtectedRoute><AssetPerformance /></ProtectedRoute>} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/loading" element={<LoadingScreen />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register-v2" element={<RegisterV2 />} />
+          <Route path="/signals" element={<PublicSignals />} />
+          <Route path="/marketplace" element={<StrategyMarketplace />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/binance-tutorial" element={<BinanceTutorial />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

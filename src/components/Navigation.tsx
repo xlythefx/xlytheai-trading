@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, Zap } from "lucide-react";
+import { Radio, Sparkles, Store, Zap } from "lucide-react";
 
 const Navigation = () => {
   return (
@@ -38,6 +38,18 @@ const Navigation = () => {
           </Link>
           
           <div className="flex items-center gap-8">
+            <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+              <Link to="/signals" className="flex items-center gap-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                <Radio className="w-3.5 h-3.5" />
+                Live Signals
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+              <Link to="/marketplace" className="flex items-center gap-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                <Store className="w-3.5 h-3.5" />
+                Marketplace
+              </Link>
+            </motion.div>
             <motion.div
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}

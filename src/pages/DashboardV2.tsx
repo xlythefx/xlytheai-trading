@@ -23,6 +23,7 @@ import {
   type BinancePastPosition,
 } from "@/lib/api";
 import { V2TopNav } from "@/components/V2TopNav";
+import { AffiliateVerificationBanner } from "@/components/AffiliateVerificationBanner";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -100,8 +101,17 @@ const AreaChart = ({ points, positive = true }: { points: EquityPoint[]; positiv
 
   if (points.length < 2) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-        No trade history yet
+      <div className="flex h-full flex-col items-center justify-center gap-3 px-4 text-center">
+        <p className="text-sm text-muted-foreground">No trade history yet</p>
+        <p className="max-w-sm text-xs text-muted-foreground/80">
+          Connect an exchange to sync positions and build your equity curve.
+        </p>
+        <Link
+          to="/dashboard/add-broker?connect=1"
+          className="text-sm font-medium text-primary underline-offset-4 transition-colors hover:text-primary/90 hover:underline"
+        >
+          Connect a broker
+        </Link>
       </div>
     );
   }
@@ -473,6 +483,11 @@ const DashboardV2 = () => {
       </div>
 
       <V2TopNav active="dashboard" brandTo="/dashboard" onRefresh={load} loading={loading} />
+
+      {/* Affiliate banner */}
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 pt-4">
+        <AffiliateVerificationBanner />
+      </div>
 
       {/* Main */}
       <main className="relative z-10 mx-auto max-w-[1600px] px-6 py-8">

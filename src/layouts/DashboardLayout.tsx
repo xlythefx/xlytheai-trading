@@ -4,7 +4,8 @@ import { DashboardSidebar } from "@/components/ui/dashboard-sidebar";
 /** Full-width pages that use V2 top nav only (no sidebar) */
 function isFullWidthDashboardPath(pathname: string) {
   const parts = pathname.replace(/\/+$/, "").split("/").filter(Boolean);
-  return parts[parts.length - 1] === "user-settings";
+  const last = parts[parts.length - 1];
+  return last === "user-settings" || last === "portfolio";
 }
 
 const DashboardLayout = () => {

@@ -207,3 +207,149 @@ export function changePassword(payload: {
     body: JSON.stringify(payload),
   });
 }
+
+// ---------- Public (no-auth) endpoints ----------
+
+export interface PublicSignal {
+  id: number;
+  strategy: string | null;
+  symbol: string;
+  event_type: string; // OPEN | CLOSE | INCREMENT | DECREMENT
+  position_side: string | null;
+  entry_price: string | null;
+  exit_price: string | null;
+  position_amt: string | null;
+  realized_pnl: string | null;
+  pnl_pct: string | null;
+  leverage: string | null;
+  note: string | null;
+  signal_time: string;
+  created_at: string;
+}
+
+export interface EquityPoint {
+  t: string | null;
+  equity: number;
+  pnl: number;
+  symbol: string | null;
+}
+
+export interface EquityResponse {
+  account: {
+    api_key: string;
+    name: string;
+    currency_type: string;
+    balance: string;
+    initial_deposit: string;
+  } | null;
+  data: EquityPoint[];
+}
+
+export interface StrategyListing {
+  id: number;
+  name: string;
+  author: string;
+  description: string;
+  tags: string[];
+  win_rate: number;
+  total_trades: number;
+  roi: number;
+  subscribers: number;
+  price: number;
+  risk: "low" | "medium" | "high";
+  color: string;
+}
+
+export function getPublicSignals(limit = 50) {
+  return apiFetch<{ data: PublicSignal[] }>(`/public/signals?limit=${limit}`);
+}
+
+export function getPublicEquity() {
+  return apiFetch<EquityResponse>("/public/equity");
+}
+
+export function getPublicStrategies() {
+  return apiFetch<{ data: StrategyListing[] }>("/public/strategies");
+}
+
+// ---------- Affiliate Verification ----------
+
+export interface AffiliateVerification {
+  id: number;
+  uni_id: string;
+  exchange: "binance" | "mexc" | "bybit";
+  exchange_uid: string;
+  screenshot_path: string;
+  status: "pending" | "approved" | "rejected";
+  admin_notes: string | null;
+  created_at: string;
+  updated_at: string;
+  user?: { id: number; uni_id: string; name: string; email: string };
+}
+
+export interface AffiliateVerificationStatus {
+  data: AffiliateVerification[];
+  has_approved: boolean;
+}
+
+export async function submitAffiliateVerification(payload: {
+  exchange: string;
+  exchange_uid: string;
+  screenshot: File;
+}) {
+  const token = getToken();
+  const formData = new FormData();
+  formData.append("exchange", payload.exchange);
+  formData.append("exchange_uid", payload.exchange_uid);
+  formData.append("screenshot", payload.screenshot);
+
+  const res = await fetch(`${API_URL}/affiliate-verification`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: formData,
+  });
+
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : {};
+
+  if (!res.ok) {
+    const msg =
+      data?.message ||
+      (data?.errors && Object.values(data.errors).flat().join(" ")) ||
+      `Request failed (${res.status})`;
+    throw new Error(msg);
+  }
+  return data as { message: string; data: AffiliateVerification };
+}
+
+export function getAffiliateVerificationStatus() {
+  return apiFetch<AffiliateVerificationStatus>("/affiliate-verification");
+}
+
+export function getAdminAffiliateVerifications(params?: {
+  status?: string;
+  search?: string;
+  page?: number;
+}) {
+  const entries = Object.entries(params || {}).filter(([, v]) => v != null && v !== "");
+  const qs = entries.length ? "?" + new URLSearchParams(entries.map(([k, v]) => [k, String(v)])).toString() : "";
+  return apiFetch<{
+    data: AffiliateVerification[];
+    current_page: number;
+    last_page: number;
+    total: number;
+  }>(`/admin/affiliate-verifications${qs}`);
+}
+
+export function updateAdminAffiliateVerification(
+  id: number,
+  payload: { status: string; admin_notes?: string },
+) {
+  return apiFetch<{ message: string; data: AffiliateVerification }>(
+    `/admin/affiliate-verifications/${id}`,
+    { method: "PUT", body: JSON.stringify(payload) },
+  );
+}

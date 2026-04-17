@@ -1,9 +1,9 @@
-import Navigation from "@/components/Navigation";
+import { PublicNav } from "@/components/PublicNav";
 
 const HowItWorks = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      <PublicNav />
       
       <div className="pt-24 pb-16">
         <div className="container max-w-7xl mx-auto px-4 text-center">

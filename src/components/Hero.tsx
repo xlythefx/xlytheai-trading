@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, TrendingUp, Shield, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import BotPerformanceChart from "@/components/BotPerformanceChart";
 
@@ -41,19 +42,6 @@ const Hero = () => {
       transition: {
         duration: 1,
         ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
-    },
-  };
-
-  const gradientVariants = {
-    hidden: { backgroundPosition: "0% 50%" },
-    visible: {
-      backgroundPosition: "100% 50%",
-      transition: {
-        duration: 3,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-        repeat: Infinity,
-        repeatType: "reverse" as const,
       },
     },
   };
@@ -109,6 +97,24 @@ const Hero = () => {
             animate="visible"
             className="space-y-8 text-center lg:text-left"
           >
+            {/* Logo + Main Title */}
+            <motion.div
+              variants={titleVariants}
+              className="flex flex-col items-center lg:items-start gap-5 mb-6"
+            >
+              <motion.img
+                src="/logo.png"
+                alt=""
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="h-16 w-16 md:h-20 md:w-20 rounded-2xl object-contain shadow-[0_0_28px_hsl(210_100%_50%/0.35)] ring-1 ring-white/10"
+              />
+              <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight text-white">
+                Inner Circle
+              </motion.h1>
+            </motion.div>
+
             {/* Badge */}
             <motion.div
               variants={itemVariants}
@@ -117,21 +123,6 @@ const Hero = () => {
               <Sparkles className="w-4 h-4 text-primary animate-pulse" />
               <span className="text-sm font-medium text-primary">AI-Powered Trading Signals</span>
             </motion.div>
-
-            {/* Main Title */}
-            <motion.h1
-              variants={titleVariants}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[0.9] tracking-tight"
-            >
-              <motion.span
-                className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_200%]"
-                variants={gradientVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                Inner Circle
-              </motion.span>
-            </motion.h1>
 
             {/* Subtitle */}
             <motion.p
@@ -181,11 +172,14 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
+                  asChild
                   size="lg"
                   className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-2xl shadow-[0_0_40px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)] transition-all duration-300"
                 >
-                  Start Trading Now
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  <Link to="/login" className="inline-flex items-center justify-center gap-0">
+                    Start Trading Now
+                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
                 </Button>
               </motion.div>
 
@@ -194,40 +188,16 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
+                  asChild
                   size="lg"
                   variant="outline"
                   className="border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 backdrop-blur-sm px-8 py-6 text-lg rounded-2xl transition-all duration-300"
                 >
-                  View Demo
+                  <Link to="/register">Join Us!</Link>
                 </Button>
               </motion.div>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-border/20"
-            >
-              {[
-                { number: "10K+", label: "Active Traders" },
-                { number: "99.9%", label: "Uptime" },
-                { number: "0.1s", label: "Signal Speed" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="text-center"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
-                    {stat.number}
-                  </div>
-                  <div className="text-xs text-muted-foreground font-medium">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Right Content - Nap.AI Bot Performance Chart */}

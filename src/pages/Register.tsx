@@ -151,7 +151,7 @@ const Register = () => {
       });
       setAuth(res.token, res.user);
       toast.success("Account created! Welcome 🎉");
-      navigate("/dashboard");
+      navigate("/dashboard-v2");
     } catch (err: any) {
       toast.error(err.message || "Registration failed");
     } finally {
@@ -206,8 +206,8 @@ const Register = () => {
           <div className="max-h-52 overflow-y-auto text-sm text-muted-foreground space-y-2 rounded-xl border border-border/40 p-3 bg-secondary/30">
             <p>
               By creating an account you agree to our{" "}
-              <Link to="/terms" className="text-primary underline">Terms of Service</Link>{" "}
-              and <Link to="/privacy" className="text-primary underline">Privacy Policy</Link>.
+              <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-primary underline">Terms of Service</Link>{" "}
+              and <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary underline">Privacy Policy</Link>.
             </p>
             <p>
               Trading involves substantial risk of loss. You are responsible for any trades
@@ -265,6 +265,9 @@ const Register = () => {
                 Sign up on Binance with this code
               </button>
             </a>
+            <Link to="/binance-tutorial" target="_blank" rel="noopener noreferrer" className="block w-full text-center text-xs text-primary hover:underline pt-1">
+              How do I get my API keys? View setup guide →
+            </Link>
           </div>
           <DialogFooter>
             <button
@@ -456,19 +459,21 @@ const Register = () => {
 
                 {/* Step 5 — Referral */}
                 {step === 5 && (
-                  <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/60">
-                      <Gift className="w-4 h-4" />
-                    </span>
-                    <input
-                      autoFocus
-                      type="text"
-                      placeholder="ABCD1234"
-                      value={form.referralCode}
-                      onChange={(e) => update("referralCode", e.target.value.toUpperCase())}
-                      className={`${inputWithIconCls} uppercase tracking-widest`}
-                      maxLength={16}
-                    />
+                  <div>
+                    <div className="relative">
+                      <span className="pointer-events-none absolute left-3.5 top-1/2 flex h-4 w-4 -translate-y-1/2 items-center justify-center text-muted-foreground/60">
+                        <Gift className="h-4 w-4 shrink-0" />
+                      </span>
+                      <input
+                        autoFocus
+                        type="text"
+                        placeholder="ABCD1234"
+                        value={form.referralCode}
+                        onChange={(e) => update("referralCode", e.target.value.toUpperCase())}
+                        className={`${inputWithIconCls} uppercase tracking-widest`}
+                        maxLength={16}
+                      />
+                    </div>
                     <p className="mt-2 text-xs text-muted-foreground">Leave blank if you don't have one — no worries!</p>
                   </div>
                 )}

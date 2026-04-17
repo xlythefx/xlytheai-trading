@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard,
   Users,
+  UserCheck,
   BarChart3,
   Settings,
   FileText,
@@ -59,6 +60,12 @@ export function AdminSidebar() {
       icon: Layers,
       href: `/admin/${adminCode}/assets`,
       description: "Trading instruments"
+    },
+    {
+      title: "Affiliates",
+      icon: UserCheck,
+      href: `/admin/${adminCode}/affiliates`,
+      description: "Affiliate verifications"
     },
     {
       title: "Audit Logs",

@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigation";
+import { PublicNav } from "@/components/PublicNav";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -59,8 +59,8 @@ const pricingPlans = [
 const Pricing = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      
+      <PublicNav />
+
       <div className="pt-24 pb-16">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">

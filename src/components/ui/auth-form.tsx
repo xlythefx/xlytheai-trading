@@ -2,10 +2,42 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { login as apiLogin, setAuth } from "@/lib/api";
 import { toast } from "sonner";
 import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
+
+// ─── Onload animation variants ───────────────────────────────────────────────
+
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
+const EASE_STD = [0.25, 0.46, 0.45, 0.94] as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28, scale: 0.96 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: EASE_OUT },
+  },
+} as const;
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.25 },
+  },
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: EASE_STD },
+  },
+} as const;
 
 interface AuthFormProps {
   className?: string;
@@ -38,6 +70,8 @@ export function AuthForm({ className }: AuthFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = (location.state as { from?: Location })?.from?.pathname || "/dashboard-v2";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,7 +83,7 @@ export function AuthForm({ className }: AuthFormProps) {
       const res = await apiLogin(email, password);
       setAuth(res.token, res.user);
       toast.success("Welcome back!");
-      navigate("/loading");
+      navigate(from, { replace: true });
     } catch (err: any) {
       toast.error(err.message || "Login failed");
     } finally {
@@ -67,37 +101,73 @@ export function AuthForm({ className }: AuthFormProps) {
 
       {/* Glow blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-40 -top-20 h-[500px] w-[500px] rounded-full bg-primary/12 blur-[160px]" />
-        <div className="absolute -right-20 top-1/3 h-[600px] w-[600px] rounded-full bg-accent/10 blur-[180px]" />
-        <div className="absolute bottom-[-15%] left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-primary/8 blur-[140px]" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0, ease: EASE_OUT }}
+          className="absolute -left-40 -top-20 h-[500px] w-[500px] rounded-full bg-primary/12 blur-[160px]"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.15, ease: EASE_OUT }}
+          className="absolute -right-20 top-1/3 h-[600px] w-[600px] rounded-full bg-accent/10 blur-[180px]"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.3, ease: EASE_OUT }}
+          className="absolute bottom-[-15%] left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-primary/8 blur-[140px]"
+        />
       </div>
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-[400px]">
-        <div className="rounded-2xl border border-border/40 bg-background/60 backdrop-blur-2xl shadow-[0_8px_40px_hsl(0_0%_0%/0.5)] px-8 pt-9 pb-8">
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 w-full max-w-[400px]"
+      >
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="rounded-2xl border border-border/40 bg-background/60 backdrop-blur-2xl shadow-[0_8px_40px_hsl(0_0%_0%/0.5)] px-8 pt-9 pb-8"
+        >
 
           {/* Logo — links back to home */}
           <div className="flex flex-col items-center mb-7">
-            <Link to="/" className="mb-5 transition-opacity hover:opacity-80">
-              <img
-                src="/logo.png"
-                alt="logo"
-                className="h-14 w-14 rounded-2xl object-contain shadow-[0_0_32px_hsl(210_100%_50%/0.35)]"
-              />
-            </Link>
-            <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-1.5">
+            <motion.div variants={itemVariants}>
+              <Link to="/" className="mb-5 block transition-opacity hover:opacity-80">
+                <motion.img
+                  src="/logo.png"
+                  alt="logo"
+                  className="h-14 w-14 rounded-2xl object-contain shadow-[0_0_32px_hsl(210_100%_50%/0.35)]"
+                  initial={{ rotate: -12, scale: 0.7, opacity: 0 }}
+                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT }}
+                />
+              </Link>
+            </motion.div>
+            <motion.h1
+              variants={itemVariants}
+              className="text-2xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-1.5"
+            >
               Welcome back
-            </h1>
-            <p className="text-sm text-muted-foreground text-center leading-relaxed">
+            </motion.h1>
+            <motion.p
+              variants={itemVariants}
+              className="text-sm text-muted-foreground text-center leading-relaxed"
+            >
               Sign in to your trading dashboard
-            </p>
+            </motion.p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-4">
 
             {/* Email */}
-            <div className="space-y-1.5">
+            <motion.div variants={itemVariants} className="space-y-1.5">
               <label htmlFor="email" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Email
               </label>
@@ -117,10 +187,10 @@ export function AuthForm({ className }: AuthFormProps) {
                   className="w-full rounded-xl border border-border/50 bg-secondary/40 pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 focus:bg-secondary/60 focus:ring-1 focus:ring-primary/20 transition-all"
                 />
               </div>
-            </div>
+            </motion.div>
 
             {/* Password */}
-            <div className="space-y-1.5">
+            <motion.div variants={itemVariants} className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Password
@@ -152,10 +222,10 @@ export function AuthForm({ className }: AuthFormProps) {
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Submit */}
-            <div className="pt-1">
+            <motion.div variants={itemVariants} className="pt-1">
               <button
                 type="submit"
                 disabled={isLoading}
@@ -167,18 +237,18 @@ export function AuthForm({ className }: AuthFormProps) {
                   "Let's go →"
                 )}
               </button>
-            </div>
+            </motion.div>
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 my-5">
+          <motion.div variants={itemVariants} className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-border/40" />
             <span className="text-[11px] text-muted-foreground/60 uppercase tracking-wider">or sign in with</span>
             <div className="flex-1 h-px bg-border/40" />
-          </div>
+          </motion.div>
 
           {/* Social buttons */}
-          <div className="grid grid-cols-3 gap-2">
+          <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2">
             <button className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-[#5865F2]/15 hover:border-[#5865F2]/40 py-2.5 text-xs font-medium text-muted-foreground hover:text-[#5865F2] transition-all">
               <DiscordIcon />
               Discord
@@ -191,17 +261,20 @@ export function AuthForm({ className }: AuthFormProps) {
               <AppleIcon />
               Apple
             </button>
-          </div>
+          </motion.div>
 
           {/* Register */}
-          <p className="text-center text-xs text-muted-foreground mt-6">
+          <motion.p
+            variants={itemVariants}
+            className="text-center text-xs text-muted-foreground mt-6"
+          >
             New here?{" "}
             <Link to="/register" className="text-primary hover:text-primary/80 font-medium transition-colors">
               Create an account
             </Link>
-          </p>
-        </div>
-      </div>
+          </motion.p>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

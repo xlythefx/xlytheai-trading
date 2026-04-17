@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,35 +24,47 @@ const BROKERS = [
     id: "binance",
     name: "Binance",
     description: "World's largest crypto exchange",
-    logo: "BNB",
-    color: "bg-yellow-500",
+    logoSrc: "/assets/binance.jpeg",
+    logoClassName: "bg-secondary/80",
     available: true,
   },
   {
     id: "bybit",
     name: "Bybit",
     description: "Coming soon",
-    logo: "BYB",
-    color: "bg-orange-500",
+    logoSrc: "/assets/bybit.png",
+    logoClassName: "bg-secondary/80",
     available: false,
   },
   {
     id: "mexc",
     name: "MEXC",
     description: "Coming soon",
-    logo: "MX",
-    color: "bg-blue-500",
+    logoSrc: "/assets/mexc.png",
+    logoClassName: "bg-secondary/80",
     available: false,
   },
-];
+] as const;
 
 const AddBroker = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const accountSectionRef = useRef<HTMLDivElement>(null);
   const [selectedBroker, setSelectedBroker] = useState("binance");
   const [showSecret, setShowSecret] = useState(false);
   const [isDemo, setIsDemo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({ api_key: "", secret_key: "", name: "" });
+
+  useEffect(() => {
+    if (searchParams.get("connect") !== "1") return;
+    const t = window.setTimeout(() => {
+      accountSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const el = document.getElementById("name");
+      el?.focus();
+    }, 150);
+    return () => window.clearTimeout(t);
+  }, [searchParams]);
 
   const update = (k: keyof typeof form, v: string) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -127,8 +139,14 @@ const AddBroker = () => {
                         : "border-border/50 bg-card/50 hover:border-border hover:bg-card/80"}
                     `}
                   >
-                    <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${broker.color} text-sm font-bold text-white shadow-sm`}>
-                      {broker.logo}
+                    <div
+                      className={`mb-3 flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl p-1 shadow-sm ring-1 ring-border/40 ${broker.logoClassName}`}
+                    >
+                      <img
+                        src={broker.logoSrc}
+                        alt=""
+                        className="h-full w-full object-contain"
+                      />
                     </div>
                     <p className="font-semibold text-sm">{broker.name}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{broker.description}</p>
@@ -148,6 +166,7 @@ const AddBroker = () => {
 
           {/* Step 2 — Account details */}
           <motion.div
+            ref={accountSectionRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}

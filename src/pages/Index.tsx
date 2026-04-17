@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import { HeroSection } from "@/components/HeroSection";
 import BrokersCarousel from "@/components/BrokersCarousel";
 import { FeatureSteps } from "@/components/blocks/feature-section";
 import FeatureSection from "@/components/ui/stack-feature-section";
 import { TestimonialCarousel } from "@/components/ui/profile-card-testimonial-carousel";
 import { Mail, MessageCircle, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const features = [
   { 
@@ -56,11 +56,10 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
-      <Navigation />
+      <HeroSection />
       <AnimatedBackground />
-      
+
       <main className="relative z-10">
-        <Hero />
         <FeatureSteps 
           features={features}
           title="Your Journey Starts Here"
@@ -135,15 +134,15 @@ const Index = () => {
             <div>
               <h3 className="text-sm font-semibold mb-4">Legal</h3>
               <div className="flex flex-col gap-3">
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
-                </a>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                </Link>
+                <Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
-                </a>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Cookie Policy
-                </a>
+                </Link>
+                <Link to="/binance-tutorial" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Binance Setup Guide
+                </Link>
                 <a href="mailto:support@innercircle.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Contact Support
                 </a>
