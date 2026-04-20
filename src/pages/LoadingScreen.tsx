@@ -1,15 +1,23 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Brain } from "lucide-react";
 
 const LoadingScreen = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const stateNext = (location.state as { next?: string } | null)?.next;
+  const queryNext = new URLSearchParams(location.search).get("next");
+  const next = stateNext || queryNext || "/dashboard-v2";
+  const label = (location.state as { label?: string } | null)?.label
+    || new URLSearchParams(location.search).get("label")
+    || "Loading your dashboard…";
 
   useEffect(() => {
-    const t = setTimeout(() => navigate("/dashboard", { replace: true }), 2200);
+    const t = setTimeout(() => navigate(next, { replace: true }), 2200);
     return () => clearTimeout(t);
-  }, [navigate]);
+  }, [navigate, next]);
 
   const bars = Array.from({ length: 5 });
 
@@ -48,7 +56,7 @@ const LoadingScreen = () => {
         <h2 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-1">
           Inner Circle
         </h2>
-        <p className="text-sm text-muted-foreground">Loading your dashboard…</p>
+        <p className="text-sm text-muted-foreground">{label}</p>
       </motion.div>
 
       {/* Animated bars */}

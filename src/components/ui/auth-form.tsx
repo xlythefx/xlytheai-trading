@@ -182,7 +182,7 @@ export function AuthForm({ className }: AuthFormProps) {
                   name="email"
                   type="email"
                   placeholder="you@example.com"
-                  defaultValue="qweqwe@gmail.com"
+                  defaultValue="napaychristianpaolo@gmail.com"
                   required
                   className="w-full rounded-xl border border-border/50 bg-secondary/40 pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 focus:bg-secondary/60 focus:ring-1 focus:ring-primary/20 transition-all"
                 />

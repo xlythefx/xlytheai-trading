@@ -10,9 +10,11 @@ import {
   Briefcase,
   BarChart2,
   TrendingUp,
+  Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { logout } from "@/lib/api";
+import { getUser, logout } from "@/lib/api";
+import { ADMIN_CODE, isAdminEmail } from "@/lib/admin";
 
 /** Which main nav link shows the active pill */
 export type V2NavActiveKey =
@@ -53,6 +55,8 @@ export function V2TopNav({
   endSlot,
 }: V2TopNavProps) {
   const navigate = useNavigate();
+  const user = getUser();
+  const showAdmin = isAdminEmail(user?.email);
 
   const handleLogout = () => {
     void logout().finally(() => {
@@ -105,6 +109,25 @@ export function V2TopNav({
         </div>
         <div className="flex items-center gap-3">
           {endSlot}
+          {showAdmin && (
+            <Button
+              size="icon"
+              variant="ghost"
+              className="rounded-full text-primary hover:bg-primary/10"
+              aria-label="Admin panel"
+              title="Admin"
+              onClick={() =>
+                navigate("/loading", {
+                  state: {
+                    next: `/admin/${ADMIN_CODE}/dashboard`,
+                    label: "Entering admin panel…",
+                  },
+                })
+              }
+            >
+              <Shield className="h-4 w-4" />
+            </Button>
+          )}
           <Button size="icon" variant="ghost" className="rounded-full hover:bg-primary/10" asChild>
             <Link to="/dashboard/user-settings" aria-label="User settings">
               <UserCircle className="h-4 w-4" />

@@ -19,17 +19,17 @@ import AboutUs from "./pages/AboutUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import LoadingScreen from "./pages/LoadingScreen";
-import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import UserManagement from "./pages/admin/UserManagement";
-import AdminSettings from "./pages/admin/AdminSettings";
 import ConfigManagement from "./pages/admin/ConfigManagement";
 import AssetsManagement from "./pages/admin/AssetsManagement";
 import AuditLogs from "./pages/admin/AuditLogs";
 import NotFound from "./pages/NotFound";
 import DashboardLayout from "./layouts/DashboardLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import SupportedAssets from "./pages/SupportedAssets";
 import PositionsV2 from "./pages/PositionsV2";
 import PublicSignals from "./pages/PublicSignals";
@@ -39,6 +39,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import BinanceTutorial from "./pages/BinanceTutorial";
 import RegisterV2 from "./pages/RegisterV2";
 import AffiliateVerifications from "./pages/admin/AffiliateVerifications";
+import AdminPositions from "./pages/admin/AdminPositions";
 
 const queryClient = new QueryClient();
 
@@ -52,15 +53,16 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           {/* Admin Routes - Must be before other routes */}
-          <Route path="/admin/:adminCode/login" element={<AdminLogin />} />
-          <Route path="/admin/:adminCode/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/:adminCode/analytics" element={<AdminAnalytics />} />
-          <Route path="/admin/:adminCode/users" element={<UserManagement />} />
-          <Route path="/admin/:adminCode/settings" element={<AdminSettings />} />
-          <Route path="/admin/:adminCode/config" element={<ConfigManagement />} />
-          <Route path="/admin/:adminCode/logs" element={<AuditLogs />} />
-          <Route path="/admin/:adminCode/assets" element={<AssetsManagement />} />
-          <Route path="/admin/:adminCode/affiliates" element={<AffiliateVerifications />} />
+          <Route path="/admin/:adminCode" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+            <Route path="dashboard"  element={<AdminDashboard />} />
+            <Route path="positions"  element={<AdminPositions />} />
+            <Route path="analytics"  element={<AdminAnalytics />} />
+            <Route path="users"      element={<UserManagement />} />
+            <Route path="config"     element={<ConfigManagement />} />
+            <Route path="logs"       element={<AuditLogs />} />
+            <Route path="assets"     element={<AssetsManagement />} />
+            <Route path="affiliates" element={<AffiliateVerifications />} />
+          </Route>
           
           <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />

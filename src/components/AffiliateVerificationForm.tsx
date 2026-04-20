@@ -13,6 +13,12 @@ import { submitAffiliateVerification } from "@/lib/api";
 const BINANCE_REFERRAL = "551477608";
 const BINANCE_SIGNUP_URL = `https://accounts.binance.com/register?ref=${BINANCE_REFERRAL}`;
 
+const MEXC_INVITE_CODE = "3wpGM";
+const MEXC_SIGNUP_URL = `https://www.mexc.com/auth/signup?inviteCode=${MEXC_INVITE_CODE}`;
+
+const BYBIT_REF_CODE = "7XPG0A";
+const BYBIT_SIGNUP_URL = `https://www.bybit.com/invite?ref=${BYBIT_REF_CODE}`;
+
 const EXCHANGES = [
   {
     id: "binance" as const,
@@ -26,17 +32,17 @@ const EXCHANGES = [
     id: "mexc" as const,
     name: "MEXC",
     logo: "/assets/mexc.png",
-    enabled: false,
-    code: "",
-    signupUrl: "",
+    enabled: true,
+    code: MEXC_INVITE_CODE,
+    signupUrl: MEXC_SIGNUP_URL,
   },
   {
     id: "bybit" as const,
     name: "Bybit",
     logo: "/assets/bybit.png",
-    enabled: false,
-    code: "",
-    signupUrl: "",
+    enabled: true,
+    code: BYBIT_REF_CODE,
+    signupUrl: BYBIT_SIGNUP_URL,
   },
 ];
 
@@ -51,7 +57,7 @@ export function AffiliateVerificationForm({
   onSkip,
   showSkip = false,
 }: AffiliateVerificationFormProps) {
-  const [selectedExchange, setSelectedExchange] = useState<string>("binance");
+  const [selectedExchange, setSelectedExchange] = useState<string>("mexc");
   const [exchangeUid, setExchangeUid] = useState("");
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

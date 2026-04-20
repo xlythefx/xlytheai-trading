@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { V2TopNav } from "@/components/V2TopNav";
-import { addBrokerAccount } from "@/lib/api";
+import { addBrokerAccount, addMexcAccount, addBybitAccount } from "@/lib/api";
 
 const BROKERS = [
   {
@@ -35,18 +35,18 @@ const BROKERS = [
   {
     id: "bybit",
     name: "Bybit",
-    description: "Coming soon",
+    description: "Leading derivatives exchange",
     logoSrc: "/assets/bybit.png",
     accent: "from-amber-500 to-orange-500",
-    available: false,
+    available: true,
   },
   {
     id: "mexc",
     name: "MEXC",
-    description: "Coming soon",
+    description: "Global spot & futures exchange",
     logoSrc: "/assets/mexc.png",
     accent: "from-sky-400 to-blue-500",
-    available: false,
+    available: true,
   },
 ] as const;
 
@@ -81,13 +81,20 @@ const AddBroker = () => {
     }
     setIsLoading(true);
     try {
-      await addBrokerAccount({
+      const payload = {
         api_key: form.api_key.trim(),
         secret_key: form.secret_key.trim(),
         name: form.name.trim(),
         demo: isDemo,
-      });
-      toast.success("Broker account added!");
+      };
+      if (selectedBroker === "mexc") {
+        await addMexcAccount(payload);
+      } else if (selectedBroker === "bybit") {
+        await addBybitAccount(payload);
+      } else {
+        await addBrokerAccount(payload);
+      }
+      toast.success(`${selected.name} account added!`);
       navigate("/dashboard/portfolio");
     } catch (err: any) {
       toast.error(err.message || "Failed to add account");
