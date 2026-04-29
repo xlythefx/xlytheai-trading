@@ -17,7 +17,7 @@ const CTA = () => {
         </h2>
         
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-          Join 10,000+ traders who are already profiting with Inner Circle. 
+          Join 10,000+ traders who are already profiting with Flowehn. 
           Get started today with our 7-day free trial - no credit card required.
         </p>
         

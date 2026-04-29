@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 const SECTIONS = [
   {
     title: "1. Acceptance of Terms",
-    body: `By accessing or using the Inner Circle platform ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not access or use the Service. These Terms apply to all visitors, users, and others who access the Service.`,
+    body: `By accessing or using the Flowehn platform ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not access or use the Service. These Terms apply to all visitors, users, and others who access the Service.`,
   },
   {
     title: "2. Description of Service",
-    body: `Inner Circle provides AI-powered trading signal automation and portfolio analytics tools that connect to third-party exchange accounts (e.g., Binance). The Service is provided for informational and automation purposes only. Inner Circle does not manage funds, provide investment advice, or act as a licensed financial advisor.`,
+    body: `Flowehn provides AI-powered trading signal automation and portfolio analytics tools that connect to third-party exchange accounts (e.g., Binance). The Service is provided for informational and automation purposes only. Flowehn does not manage funds, provide investment advice, or act as a licensed financial advisor.`,
   },
   {
     title: "3. Eligibility",
@@ -21,11 +21,11 @@ const SECTIONS = [
   },
   {
     title: "5. API Key & Exchange Connection",
-    body: `The Service requires you to provide API keys from supported exchanges (e.g., Binance). You are solely responsible for managing and securing your API keys. Inner Circle stores API keys using industry-standard encryption but cannot guarantee absolute security. We strongly recommend using API keys with trading-only permissions and no withdrawal permissions. You may revoke API access at any time from your exchange settings.`,
+    body: `The Service requires you to provide API keys from supported exchanges (e.g., Binance). You are solely responsible for managing and securing your API keys. Flowehn stores API keys using industry-standard encryption but cannot guarantee absolute security. We strongly recommend using API keys with trading-only permissions and no withdrawal permissions. You may revoke API access at any time from your exchange settings.`,
   },
   {
     title: "6. Trading Risk Disclosure",
-    body: `Cryptocurrency and derivatives trading involves substantial risk of loss. Past performance of signals or strategies is not indicative of future results. The Service provides signals and automation tools but does not guarantee profits. You are solely responsible for all trades executed through your connected exchange accounts. Never trade with funds you cannot afford to lose. Inner Circle shall not be liable for any financial losses, whether direct or indirect, arising from your use of the Service.`,
+    body: `Cryptocurrency and derivatives trading involves substantial risk of loss. Past performance of signals or strategies is not indicative of future results. The Service provides signals and automation tools but does not guarantee profits. You are solely responsible for all trades executed through your connected exchange accounts. Never trade with funds you cannot afford to lose. Flowehn shall not be liable for any financial losses, whether direct or indirect, arising from your use of the Service.`,
   },
   {
     title: "7. Subscription & Payments",
@@ -37,7 +37,7 @@ const SECTIONS = [
   },
   {
     title: "9. Intellectual Property",
-    body: `The Service and its original content, features, and functionality are and will remain the exclusive property of Inner Circle and its licensors. Our trademarks and trade dress may not be used in connection with any product or service without prior written consent. You are granted a limited, non-exclusive, non-transferable license to access and use the Service for personal, non-commercial purposes.`,
+    body: `The Service and its original content, features, and functionality are and will remain the exclusive property of Flowehn and its licensors. Our trademarks and trade dress may not be used in connection with any product or service without prior written consent. You are granted a limited, non-exclusive, non-transferable license to access and use the Service for personal, non-commercial purposes.`,
   },
   {
     title: "10. Privacy",
@@ -53,11 +53,11 @@ const SECTIONS = [
   },
   {
     title: "13. Limitation of Liability",
-    body: `To the maximum extent permitted by applicable law, Inner Circle shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of (or inability to access or use) the Service.`,
+    body: `To the maximum extent permitted by applicable law, Flowehn shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of (or inability to access or use) the Service.`,
   },
   {
     title: "14. Governing Law",
-    body: `These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Inner Circle is incorporated, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be resolved through binding arbitration or in the courts of competent jurisdiction.`,
+    body: `These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Flowehn is incorporated, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be resolved through binding arbitration or in the courts of competent jurisdiction.`,
   },
   {
     title: "15. Changes to Terms",
@@ -92,7 +92,7 @@ const TermsOfService = () => {
               Last updated: April 15, 2025 &nbsp;·&nbsp; Effective immediately
             </p>
             <p className="mt-4 text-sm text-muted-foreground max-w-xl mx-auto">
-              Please read these Terms carefully before using Inner Circle. They govern your use of the platform and the services we provide.
+              Please read these Terms carefully before using Flowehn. They govern your use of the platform and the services we provide.
             </p>
           </motion.div>
         </div>

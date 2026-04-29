@@ -77,7 +77,7 @@ const Index = () => {
             {/* Brand Section */}
             <div>
               <h3 className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
-                Inner Circle
+                Flowehn
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
                 AI-powered trading signals for smarter investments. Get real-time alerts and make informed decisions.
@@ -154,7 +154,7 @@ const Index = () => {
           <div className="border-t border-border/50 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-muted-foreground text-sm text-center md:text-left">
-                © 2025 Inner Circle. All rights reserved.
+                © 2025 Flowehn. All rights reserved.
               </p>
               <p className="text-muted-foreground text-sm text-center md:text-right">
                 Built with 💙 for traders worldwide

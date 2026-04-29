@@ -21,7 +21,7 @@ export function PublicNav() {
           <Link to="/" className="flex items-center gap-2.5 group">
             <motion.img
               src="/logo.png"
-              alt="Inner Circle"
+              alt="Flowehn"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
@@ -33,7 +33,7 @@ export function PublicNav() {
               transition={{ duration: 0.5 }}
               className="text-xl font-bold tracking-tight text-white"
             >
-              Inner Circle
+              Flowehn
             </motion.span>
           </Link>
 

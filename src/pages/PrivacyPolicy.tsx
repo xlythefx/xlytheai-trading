@@ -13,7 +13,7 @@ type PolicySection = {
 const SECTIONS: PolicySection[] = [
   {
     title: "1. Introduction",
-    body: `Inner Circle ("we", "our", or "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform. By using the Service, you consent to the practices described in this Policy.`,
+    body: `Flowehn ("we", "our", or "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform. By using the Service, you consent to the practices described in this Policy.`,
   },
   {
     title: "2. Information We Collect",

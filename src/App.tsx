@@ -36,6 +36,7 @@ import PublicSignals from "./pages/PublicSignals";
 import StrategyMarketplace from "./pages/StrategyMarketplace";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RiskDisclaimer from "./pages/RiskDisclaimer";
 import BinanceTutorial from "./pages/BinanceTutorial";
 import RegisterV2 from "./pages/RegisterV2";
 import AffiliateVerifications from "./pages/admin/AffiliateVerifications";
@@ -88,6 +89,7 @@ const App = () => (
           <Route path="/marketplace" element={<StrategyMarketplace />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/disclaimer" element={<RiskDisclaimer />} />
           <Route path="/binance-tutorial" element={<BinanceTutorial />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -76,7 +76,7 @@ const BinanceTutorial = () => {
               How to Connect Binance
             </h1>
             <p className="text-base text-muted-foreground max-w-xl mx-auto">
-              Follow this step-by-step guide to generate your Binance API keys and securely link your account to Inner Circle.
+              Follow this step-by-step guide to generate your Binance API keys and securely link your account to Flowehn.
             </p>
           </motion.div>
         </div>
@@ -147,7 +147,7 @@ const BinanceTutorial = () => {
           <Section index={3} title="Create a New API Key">
             <p className="text-sm text-muted-foreground leading-relaxed">
               On the API Management page, click <strong className="text-foreground">+ Create API</strong>. You must choose{" "}
-              <strong className="text-foreground">System-generated</strong> — these keys use <strong className="text-foreground">HMAC</strong> signing, which is what Inner Circle expects. Do not use Ed25519 or other key types for this integration.
+              <strong className="text-foreground">System-generated</strong> — these keys use <strong className="text-foreground">HMAC</strong> signing, which is what Flowehn expects. Do not use Ed25519 or other key types for this integration.
             </p>
 
             <ScreenshotPlaceholder
@@ -157,13 +157,13 @@ const BinanceTutorial = () => {
             />
 
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Give your key a label — something like <code className="text-primary text-xs bg-primary/10 rounded px-1.5 py-0.5">InnerCircle</code> — so you can identify it later.
+              Give your key a label — something like <code className="text-primary text-xs bg-primary/10 rounded px-1.5 py-0.5">Flowehn</code> — so you can identify it later.
             </p>
 
             <ScreenshotPlaceholder
               step={3}
               label="API key label input dialog"
-              hint="Shows the modal asking for a label name with 'InnerCircle' typed in"
+              hint="Shows the modal asking for a label name with 'Flowehn' typed in"
             />
 
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -185,9 +185,9 @@ const BinanceTutorial = () => {
 
             <div className="space-y-2">
               {[
-                { label: "Read Info", required: true, note: "Lets Inner Circle read your balance and positions", warn: false },
+                { label: "Read Info", required: true, note: "Lets Flowehn read your balance and positions", warn: false },
                 { label: "Enable Futures", required: true, note: "Required for trade signals and positions on Binance Futures", warn: false },
-                { label: "Enable Withdrawals", required: false, note: "NEVER enable — Inner Circle does not need withdrawal access", warn: true },
+                { label: "Enable Withdrawals", required: false, note: "NEVER enable — Flowehn does not need withdrawal access", warn: true },
               ].map((perm) => (
                 <div
                   key={perm.label}
@@ -217,7 +217,7 @@ const BinanceTutorial = () => {
             </div>
 
             <WarningBox>
-              Never enable <strong>withdrawal permissions</strong> for any API key used with third-party platforms. Inner Circle does not require and will never request withdrawal access.
+              Never enable <strong>withdrawal permissions</strong> for any API key used with third-party platforms. Flowehn does not require and will never request withdrawal access.
             </WarningBox>
 
             <div className="rounded-xl border border-primary/40 bg-primary/10 px-4 py-4 space-y-3">
@@ -226,21 +226,21 @@ const BinanceTutorial = () => {
                 <div>
                   <p className="text-sm font-semibold text-primary">Whitelist this IP (required)</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Under <strong className="text-foreground">IP Access Restrictions</strong>, restrict the key to trusted IPs only and add the address Inner Circle provides. IP whitelist is mandatory — keys without it may be rejected.
+                    Under <strong className="text-foreground">IP Access Restrictions</strong>, restrict the key to trusted IPs only and add the address Flowehn provides. IP whitelist is mandatory — keys without it may be rejected.
                   </p>
                 </div>
               </div>
               <div className="rounded-lg border border-border/50 bg-background/60 px-3 py-2.5 font-mono text-sm text-foreground">
                 203.0.113.42
                 <span className="block text-xs font-sans font-normal text-amber-400/90 mt-2">
-                  ↑ Sample only — <strong className="text-foreground">change this</strong> to the exact IP address from Inner Circle (or your approved static IP). Do not use the example value in production.
+                  ↑ Sample only — <strong className="text-foreground">change this</strong> to the exact IP address from Flowehn (or your approved static IP). Do not use the example value in production.
                 </span>
               </div>
             </div>
 
             <TipBox>
               In Binance Futures, open <strong className="text-foreground">Preferences</strong> and set position mode to{" "}
-              <strong className="text-foreground">Hedge mode</strong> (not One-way) for seamless integration with Inner Circle order handling.
+              <strong className="text-foreground">Hedge mode</strong> (not One-way) for seamless integration with Flowehn order handling.
             </TipBox>
 
             <ScreenshotPlaceholder
@@ -263,7 +263,7 @@ const BinanceTutorial = () => {
           {/* ── STEP 5: Copy your keys ────────────────────────────────────── */}
           <Section index={5} title="Copy Your API Key & Secret Key">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Inner Circle only needs these two values — nothing else. Once the key is created, Binance will display your{" "}
+              Flowehn only needs these two values — nothing else. Once the key is created, Binance will display your{" "}
               <strong className="text-foreground">API Key</strong> and <strong className="text-foreground">Secret Key</strong> (HMAC system-generated key pair).
             </p>
 
@@ -295,15 +295,15 @@ const BinanceTutorial = () => {
             </div>
           </Section>
 
-          {/* ── STEP 6: Add to Inner Circle ───────────────────────────────── */}
-          <Section index={6} title="Add Your Keys to Inner Circle">
+          {/* ── STEP 6: Add to Flowehn ───────────────────────────────── */}
+          <Section index={6} title="Add Your Keys to Flowehn">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              In your Inner Circle dashboard, go to <strong className="text-foreground">Add Broker</strong> (or use the button below). Paste only your <strong className="text-foreground">API Key</strong> and <strong className="text-foreground">Secret Key</strong> — no passphrase or other fields — then click <strong className="text-foreground">Connect</strong>.
+              In your Flowehn dashboard, go to <strong className="text-foreground">Add Broker</strong> (or use the button below). Paste only your <strong className="text-foreground">API Key</strong> and <strong className="text-foreground">Secret Key</strong> — no passphrase or other fields — then click <strong className="text-foreground">Connect</strong>.
             </p>
 
             <ScreenshotPlaceholder
               step={6}
-              label="Inner Circle — Add Broker form"
+              label="Flowehn — Add Broker form"
               hint="Shows the 'Add Broker' page in the dashboard with the API Key and Secret Key input fields"
             />
 
@@ -323,7 +323,7 @@ const BinanceTutorial = () => {
             </div>
 
             <TipBox>
-              Inner Circle stores your API keys with AES-256 encryption. Your keys are never exposed in plain text and are only used to communicate with Binance on your behalf.
+              Flowehn stores your API keys with AES-256 encryption. Your keys are never exposed in plain text and are only used to communicate with Binance on your behalf.
             </TipBox>
           </Section>
 
@@ -337,7 +337,7 @@ const BinanceTutorial = () => {
             <CheckCircle className="w-8 h-8 text-primary mx-auto mb-3" />
             <h3 className="text-base font-semibold text-foreground mb-1">You're all set!</h3>
             <p className="text-sm text-muted-foreground max-w-md mx-auto">
-              Once your Binance account is connected, Inner Circle will start monitoring signals and can automate trades based on your configured strategy.
+              Once your Binance account is connected, Flowehn will start monitoring signals and can automate trades based on your configured strategy.
             </p>
           </motion.div>
 

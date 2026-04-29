@@ -54,7 +54,7 @@ const LoadingScreen = () => {
         transition={{ delay: 0.3, duration: 0.5 }}
       >
         <h2 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-1">
-          Inner Circle
+          Flowehn
         </h2>
         <p className="text-sm text-muted-foreground">{label}</p>
       </motion.div>

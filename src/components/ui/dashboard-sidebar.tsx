@@ -153,7 +153,7 @@ export function DashboardSidebar({ className }: SidebarProps) {
                 <Brain className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Inner Circle</h2>
+                <h2 className="font-bold text-lg">Flowehn</h2>
                 <p className="text-xs text-muted-foreground">Trading Dashboard</p>
               </div>
             </motion.div>

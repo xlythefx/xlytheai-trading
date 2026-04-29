@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
     name: "Michael Chen",
     title: "Senior Software Engineer, Cloud Infrastructure",
     description:
-      "Inner Circle has completely transformed my trading approach. The AI-powered signals are incredibly accurate and the real-time alerts have helped me make profitable decisions consistently. The platform is intuitive and the support team is exceptional.",
+      "Flowehn has completely transformed my trading approach. The AI-powered signals are incredibly accurate and the real-time alerts have helped me make profitable decisions consistently. The platform is intuitive and the support team is exceptional.",
     imageUrl:
       "https://plus.unsplash.com/premium_photo-1689977807477-a579eda91fa2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     rating: 5,
@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
     name: "Jessica Roberts",
     title: "Lead Data Scientist, InsightX",
     description:
-      "The precision of Inner Circle' signals is remarkable. As a data scientist, I appreciate the sophisticated algorithms behind the platform. It's helped me achieve consistent returns while managing risk effectively. Highly recommended for serious traders.",
+      "The precision of Flowehn' signals is remarkable. As a data scientist, I appreciate the sophisticated algorithms behind the platform. It's helped me achieve consistent returns while managing risk effectively. Highly recommended for serious traders.",
     imageUrl:
       "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=600&q=80",
     rating: 5,
@@ -56,7 +56,7 @@ const testimonials: Testimonial[] = [
     name: "William Carter",
     title: "VP Product, NovaLabs",
     description:
-      "Inner Circle has been a game-changer for our trading operations. The AI analysis is incredibly sophisticated and the execution speed is unmatched. We've seen significant improvements in our trading performance since implementing their signals.",
+      "Flowehn has been a game-changer for our trading operations. The AI analysis is incredibly sophisticated and the execution speed is unmatched. We've seen significant improvements in our trading performance since implementing their signals.",
     imageUrl:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
     rating: 5,
@@ -69,7 +69,7 @@ const testimonials: Testimonial[] = [
     name: "Sarah Johnson",
     title: "Independent Trader",
     description:
-      "I've tried many trading signal services, but Inner Circle stands out. The accuracy of their predictions and the quality of their analysis is outstanding. The platform is user-friendly and the customer support is top-notch. Worth every penny!",
+      "I've tried many trading signal services, but Flowehn stands out. The accuracy of their predictions and the quality of their analysis is outstanding. The platform is user-friendly and the customer support is top-notch. Worth every penny!",
     imageUrl:
       "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=600&q=80",
     rating: 5,
@@ -82,7 +82,7 @@ const testimonials: Testimonial[] = [
     name: "David Kim",
     title: "Hedge Fund Manager",
     description:
-      "Inner Circle provides institutional-grade trading signals at an accessible price point. The AI technology is cutting-edge and the results speak for themselves. Our fund has seen a 40% improvement in trading performance since using their platform.",
+      "Flowehn provides institutional-grade trading signals at an accessible price point. The AI technology is cutting-edge and the results speak for themselves. Our fund has seen a 40% improvement in trading performance since using their platform.",
     imageUrl:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
     rating: 5,
@@ -151,7 +151,7 @@ export function TestimonialCarousel({ className }: TestimonialCarouselProps) {
             viewport={{ once: true }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            Join thousands of successful traders who trust Inner Circle for their trading decisions
+            Join thousands of successful traders who trust Flowehn for their trading decisions
           </motion.p>
         </div>
 

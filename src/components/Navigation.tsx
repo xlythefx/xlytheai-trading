@@ -16,7 +16,7 @@ const Navigation = () => {
                 transition={{ duration: 0.5 }}
               >
                 <span className="text-xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Inner Circle
+                  Flowehn
                 </span>
               </motion.div>
             </div>

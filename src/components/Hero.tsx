@@ -111,7 +111,7 @@ const Hero = () => {
                 className="h-16 w-16 md:h-20 md:w-20 rounded-2xl object-contain shadow-[0_0_28px_hsl(210_100%_50%/0.35)] ring-1 ring-white/10"
               />
               <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight text-white">
-                Inner Circle
+                Flowehn
               </motion.h1>
             </motion.div>
 

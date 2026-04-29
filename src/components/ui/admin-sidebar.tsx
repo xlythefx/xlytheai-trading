@@ -70,7 +70,7 @@ export function AdminSidebar({ collapsed, onToggle }: AdminSidebarProps) {
             {!collapsed && (
               <div className="min-w-0">
                 <h2 className="truncate text-lg font-bold tracking-tight">XlytheAI</h2>
-                <p className="text-xs text-muted-foreground">Inner Circle</p>
+                <p className="text-xs text-muted-foreground">Flowehn</p>
               </div>
             )}
           </div>

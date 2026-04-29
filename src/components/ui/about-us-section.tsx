@@ -177,7 +177,7 @@ export default function AboutUsSection() {
             DISCOVER OUR STORY
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            About Inner Circle
+            About Flowehn
           </h2>
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-primary to-accent"

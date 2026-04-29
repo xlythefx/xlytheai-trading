@@ -78,7 +78,7 @@ export function V2TopNav({
             className="flex items-center gap-2 transition hover:opacity-80"
           >
             <img src="/logo.png" alt="" className="h-9 w-9 rounded-xl object-contain" />
-            <span className="text-lg font-bold tracking-tight text-foreground">Inner Circle</span>
+            <span className="text-lg font-bold tracking-tight text-foreground">Flowehn</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_ITEMS.map((item) => {
