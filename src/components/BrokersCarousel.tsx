@@ -104,10 +104,10 @@ const BrokersCarousel = () => {
       <div className="container max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <GradientHeading variant="secondary" size="sm" className="mb-2">
-            Trusted by traders worldwide
+            Fully integrated with
           </GradientHeading>
           <GradientHeading size="lg">
-            Brokers Supported
+            Binance · MEXC · Bybit
           </GradientHeading>
         </div>
         

@@ -38,7 +38,7 @@ const BROKERS = [
     description: "Leading derivatives exchange",
     logoSrc: "/assets/bybit.png",
     accent: "from-amber-500 to-orange-500",
-    available: true,
+    available: false,
   },
   {
     id: "mexc",
@@ -232,7 +232,9 @@ const AddBroker = () => {
                           />
                         </div>
                         <p className="text-base font-bold">{broker.name}</p>
-                        <p className="mt-0.5 text-xs text-muted-foreground">{broker.description}</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {broker.available ? broker.description : `${broker.description} · Coming Soon`}
+                        </p>
                       </div>
 
                       {isSelected && (
@@ -247,7 +249,7 @@ const AddBroker = () => {
                       )}
                       {!broker.available && (
                         <span className="absolute right-3 top-3 rounded-full bg-muted/80 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground ring-1 ring-border/40">
-                          Soon
+                          Coming Soon
                         </span>
                       )}
                     </motion.button>

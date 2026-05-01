@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { getToken } from "@/lib/api";
 import { Link } from "react-router-dom";
 import {
   Brain,
@@ -37,6 +38,7 @@ export default function FeatureSection() {
   const orbitCount = 3;
   const orbitGap = 8; // rem between orbits
   const iconsPerOrbit = Math.ceil(iconConfigs.length / orbitCount);
+  const startTradingTo = getToken() ? "/dashboard-v2" : "/login";
 
   return (
     <section className="relative max-w-7xl mx-auto my-24 px-4 flex items-center justify-between min-h-[30rem] overflow-hidden">
@@ -60,7 +62,7 @@ export default function FeatureSection() {
           </p>
           
           <div className="flex items-center gap-4">
-            <Link to="/dashboard">
+            <Link to={startTradingTo}>
               <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-2xl shadow-[0_0_40px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)] transition-all duration-300">
                 Start Trading Now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />

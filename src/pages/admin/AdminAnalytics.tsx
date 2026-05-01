@@ -1,4 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   BarChart3,
   TrendingUp,
@@ -10,6 +12,10 @@ import {
   Trophy,
   PieChart as PieIcon,
   Sparkles,
+  ArrowRight,
+  CandlestickChart,
+  Layers3,
+  ShieldAlert,
 } from "lucide-react";
 import {
   LineChart,
@@ -93,6 +99,42 @@ const topStrategies = [
   { name: "Smart Grid Bot",       trades: 101, pnl: 3780,  winRate: 58.7 },
 ];
 
+const ACTION_BUTTONS = [
+  {
+    label: "Asset Performance",
+    description: "Inspect per-asset P&L and trade depth",
+    icon: Layers3,
+    to: "/asset-performance",
+  },
+  {
+    label: "Strategy Analytics",
+    description: "Break down strategy-level edge and drawdown",
+    icon: CandlestickChart,
+    comingSoon: true,
+  },
+  {
+    label: "Risk Attribution",
+    description: "Track exposure, concentration, and loss drivers",
+    icon: ShieldAlert,
+    comingSoon: true,
+  },
+  {
+    label: "Execution Quality",
+    description: "Review slippage, fill quality, and latency",
+    icon: ArrowRight,
+    comingSoon: true,
+  },
+] as const;
+
+const EQUITY_TICK_STEP = 50000;
+const equityMax = Math.max(...equityCurve.map((point) => point.equity));
+const equityAxisMax =
+  Math.ceil((equityMax + EQUITY_TICK_STEP * 0.75) / EQUITY_TICK_STEP) * EQUITY_TICK_STEP;
+const equityTicks = Array.from(
+  { length: Math.floor(equityAxisMax / EQUITY_TICK_STEP) + 1 },
+  (_, index) => index * EQUITY_TICK_STEP,
+);
+
 const AdminAnalytics = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -105,6 +147,61 @@ const AdminAnalytics = () => {
 
       <div className="flex-1 p-6 overflow-y-auto">
         <div className="max-w-7xl mx-auto space-y-6">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {ACTION_BUTTONS.map((action) => {
+              const Icon = action.icon;
+
+              if ("to" in action) {
+                return (
+                  <Button
+                    key={action.label}
+                    asChild
+                    variant="outline"
+                    className="h-auto justify-start rounded-xl border-border/50 bg-card/50 px-4 py-4 text-left backdrop-blur-sm hover:border-primary/40 hover:bg-card/70"
+                  >
+                    <Link to={action.to} className="flex w-full items-start gap-3">
+                      <span className="mt-0.5 rounded-lg bg-primary/12 p-2 text-primary">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold text-foreground">
+                          {action.label}
+                        </span>
+                        <span className="mt-1 block text-xs text-muted-foreground">
+                          {action.description}
+                        </span>
+                      </span>
+                    </Link>
+                  </Button>
+                );
+              }
+
+              return (
+                <div
+                  key={action.label}
+                  className="flex items-start gap-3 rounded-xl border border-border/50 bg-card/35 px-4 py-4 opacity-80"
+                >
+                  <span className="mt-0.5 rounded-lg bg-muted/60 p-2 text-muted-foreground">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-foreground">
+                        {action.label}
+                      </span>
+                      <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Coming Soon
+                      </span>
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {action.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
           {/* Top KPI row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <StatCard
@@ -157,7 +254,13 @@ const AdminAnalytics = () => {
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
                     <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" fontSize={11} />
-                    <YAxis stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                    <YAxis
+                      stroke="hsl(var(--muted-foreground))"
+                      fontSize={11}
+                      domain={[0, equityAxisMax]}
+                      ticks={equityTicks}
+                      tickFormatter={(value: number) => value.toLocaleString()}
+                    />
                     <Tooltip
                       contentStyle={{
                         background: "hsl(var(--card))",

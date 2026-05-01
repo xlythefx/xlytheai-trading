@@ -218,8 +218,19 @@ const Portfolio = () => {
               Portfolio
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Manage your broker connections across Binance, MEXC, and Bybit
+              Manage your broker connections across Binance and MEXC. Bybit is coming soon.
             </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-medium">
+              <span className="rounded-full bg-primary/10 px-2.5 py-1 text-primary ring-1 ring-primary/20">
+                Binance available
+              </span>
+              <span className="rounded-full bg-primary/10 px-2.5 py-1 text-primary ring-1 ring-primary/20">
+                MEXC available
+              </span>
+              <span className="rounded-full bg-muted/70 px-2.5 py-1 text-muted-foreground ring-1 ring-border/40">
+                Bybit coming soon
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -372,7 +383,7 @@ const Portfolio = () => {
                 </div>
                 <p className="mb-2 text-lg font-semibold">No broker accounts yet</p>
                 <p className="mx-auto mb-6 max-w-md text-sm text-muted-foreground">
-                  Connect a Binance, MEXC, or Bybit account to start tracking your portfolio.
+                  Connect a Binance or MEXC account to start tracking your portfolio. Bybit is coming soon.
                 </p>
                 <Button
                   onClick={() => navigate("/dashboard/add-broker")}

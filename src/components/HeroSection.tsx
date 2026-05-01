@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { ArrowRight, LogIn, Radio, Store, Gift, Menu, X, Zap, AlertTriangle } from "lucide-react";
+import { ArrowRight, LogIn, Radio, Store, Menu, X, Zap, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ReferralProgramButton } from "@/components/ReferralProgramButton";
+import { getToken } from "@/lib/api";
 
 // ─── Lightning WebGL Background ──────────────────────────────────────────────
 
@@ -330,14 +332,9 @@ const FloatingNav = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link to="/register" className="hidden md:block">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="sm" className="bg-primary hover:bg-primary/90 rounded-full gap-2 text-sm shadow-[0_0_20px_hsl(210_100%_50%/0.3)]">
-                  <Gift className="w-3.5 h-3.5" />
-                  Referral Program
-                </Button>
-              </motion.div>
-            </Link>
+            <div className="hidden md:block">
+              <ReferralProgramButton compact />
+            </div>
 
             <button
               className="md:hidden p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
@@ -374,11 +371,7 @@ const FloatingNav = () => {
                   {label}
                 </Link>
               ))}
-              <Link to="/register" onClick={() => setMobileOpen(false)}>
-                <Button className="bg-primary hover:bg-primary/90 rounded-full px-8 gap-2 mt-2">
-                  <Gift className="w-4 h-4" /> Referral Program
-                </Button>
-              </Link>
+              <ReferralProgramButton onClick={() => setMobileOpen(false)} />
             </div>
           </motion.div>
         )}
@@ -400,6 +393,8 @@ const itemVariants: Variants = {
 };
 
 export const HeroSection = () => {
+  const startTradingTo = getToken() ? "/dashboard-v2" : "/login";
+
   return (
     <div className="relative w-full bg-black text-white overflow-hidden">
       <FloatingNav />
@@ -476,9 +471,9 @@ export const HeroSection = () => {
 
           {/* CTA buttons */}
           <motion.div variants={itemVariants} className="mt-10 flex flex-col sm:flex-row gap-4">
-            <Link to="/register">
+            <Link to={startTradingTo}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8 py-6 text-base gap-2 shadow-[0_0_40px_hsl(210_100%_50%/0.4)] hover:shadow-[0_0_60px_hsl(210_100%_50%/0.6)] transition-all">
+                <Button size="lg" className="rounded-full px-8 py-6 text-base gap-2 bg-[linear-gradient(135deg,hsl(210,100%,45%)_0%,hsl(220,95%,55%)_50%,hsl(200,100%,50%)_100%)] hover:brightness-110 text-white border-0 shadow-[0_0_30px_hsl(210_100%_50%/0.5),0_0_60px_hsl(210_100%_50%/0.25)] hover:shadow-[0_0_45px_hsl(210_100%_50%/0.7),0_0_80px_hsl(210_100%_50%/0.35)] transition-all duration-300">
                   <Zap className="w-4 h-4" />
                   Start Trading Now
                   <ArrowRight className="w-4 h-4" />

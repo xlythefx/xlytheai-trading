@@ -5,8 +5,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import BotPerformanceChart from "@/components/BotPerformanceChart";
+import { getToken } from "@/lib/api";
 
 const Hero = () => {
+  const startTradingTo = getToken() ? "/dashboard-v2" : "/login";
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, offset: 100 });
   }, []);
@@ -176,7 +179,7 @@ const Hero = () => {
                   size="lg"
                   className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-2xl shadow-[0_0_40px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)] transition-all duration-300"
                 >
-                  <Link to="/login" className="inline-flex items-center justify-center gap-0">
+                  <Link to={startTradingTo} className="inline-flex items-center justify-center gap-0">
                     Start Trading Now
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>

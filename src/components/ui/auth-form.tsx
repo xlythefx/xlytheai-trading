@@ -72,6 +72,7 @@ export function AuthForm({ className }: AuthFormProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: Location })?.from?.pathname || "/dashboard-v2";
+  const showConnectionSoon = () => toast.info("Connection is coming soon");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -181,8 +182,7 @@ export function AuthForm({ className }: AuthFormProps) {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="you@example.com"
-                  defaultValue="napaychristianpaolo@gmail.com"
+                  placeholder="Enter your email"
                   required
                   className="w-full rounded-xl border border-border/50 bg-secondary/40 pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 focus:bg-secondary/60 focus:ring-1 focus:ring-primary/20 transition-all"
                 />
@@ -196,7 +196,7 @@ export function AuthForm({ className }: AuthFormProps) {
                   Password
                 </label>
                 <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                  Forgot?
+                  Forgot Password
                 </Link>
               </div>
               <div className="relative">
@@ -209,8 +209,7 @@ export function AuthForm({ className }: AuthFormProps) {
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  defaultValue="qweqwe"
+                  placeholder="Enter your password"
                   required
                   className="w-full rounded-xl border border-border/50 bg-secondary/40 pl-10 pr-10 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 focus:bg-secondary/60 focus:ring-1 focus:ring-primary/20 transition-all"
                 />
@@ -249,15 +248,27 @@ export function AuthForm({ className }: AuthFormProps) {
 
           {/* Social buttons */}
           <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2">
-            <button className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-[#5865F2]/15 hover:border-[#5865F2]/40 py-2.5 text-xs font-medium text-muted-foreground hover:text-[#5865F2] transition-all">
+            <button
+              type="button"
+              onClick={showConnectionSoon}
+              className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-[#5865F2]/15 hover:border-[#5865F2]/40 py-2.5 text-xs font-medium text-muted-foreground hover:text-[#5865F2] transition-all"
+            >
               <DiscordIcon />
               Discord
             </button>
-            <button className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/70 py-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all">
+            <button
+              type="button"
+              onClick={showConnectionSoon}
+              className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/70 py-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all"
+            >
               <GoogleIcon />
               Google
             </button>
-            <button className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/70 py-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all">
+            <button
+              type="button"
+              onClick={showConnectionSoon}
+              className="flex items-center justify-center gap-2 rounded-xl border border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/70 py-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all"
+            >
               <AppleIcon />
               Apple
             </button>
